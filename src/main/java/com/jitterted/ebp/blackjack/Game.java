@@ -27,21 +27,6 @@ public class Game {
         resetScreen();
     }
 
-    private static void displayWelcome() {
-        System.out.println(ansi()
-                                   .bgBright(Ansi.Color.WHITE)
-                                   .eraseScreen()
-                                   .cursor(1, 1)
-                                   .fgGreen().a("Welcome to")
-                                   .fgRed().a(" JitterTed's")
-                                   .fgBlack().a(" BlackJack game"));
-        System.out.println(ansi()
-                                   .cursor(3, 1)
-                                   .fgBrightBlack().a("Hit [ENTER] to start..."));
-
-        System.console().readLine();
-    }
-
     private static void setupScreen() {
         AnsiConsole.systemInstall();
     }
@@ -63,12 +48,6 @@ public class Game {
     public void initialDeal() {
         dealRoundOfCards();
         dealRoundOfCards();
-    }
-
-    private void dealRoundOfCards() {
-        // player gets card first due to rules of Blackjack
-        playerHand.add(deck.draw());
-        dealerHand.add(deck.draw());
     }
 
     public void play() {
@@ -191,6 +170,28 @@ public class Game {
                                .map(Card::display)
                                .collect(Collectors.joining(
                                        ansi().cursorUp(6).cursorRight(1).toString())));
+    }
+
+
+    private static void displayWelcome() {
+        System.out.println(ansi()
+                                   .bgBright(Ansi.Color.WHITE)
+                                   .eraseScreen()
+                                   .cursor(1, 1)
+                                   .fgGreen().a("Welcome to")
+                                   .fgRed().a(" JitterTed's")
+                                   .fgBlack().a(" BlackJack game"));
+        System.out.println(ansi()
+                                   .cursor(3, 1)
+                                   .fgBrightBlack().a("Hit [ENTER] to start..."));
+
+        System.console().readLine();
+    }
+
+    private void dealRoundOfCards() {
+        // player gets card first due to rules of Blackjack
+        playerHand.add(deck.draw());
+        dealerHand.add(deck.draw());
     }
 
     private void displayFinalGameState() {
