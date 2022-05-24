@@ -41,6 +41,9 @@ public class Hand {
     }
 
     void drawCardFrom(Deck deck) {
+        if (isBusted()) {
+            throw new IllegalStateException();
+        }
         cards.add(deck.draw());
     }
 
@@ -53,5 +56,26 @@ public class Hand {
 
     Card faceUpCard() {
         return cards.get(0);
+    }
+
+    boolean isBusted() {
+        return value() > 21;
+    }
+
+    // makes no sense if isBusted = true
+    boolean pushes(Hand hand) {
+        if (isBusted()) {
+            throw new IllegalStateException();
+        }
+        return value() == hand.value();
+    }
+
+    // makes no sense if isBusted = true
+    boolean beats(Hand hand) {
+        return hand.value() < value();
+    }
+
+    boolean shouldDealerHit() {
+        return value() <= 16;
     }
 }
