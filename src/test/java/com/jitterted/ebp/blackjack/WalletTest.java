@@ -50,7 +50,7 @@ public class WalletTest {
         wallet.addMoney(8);
 
         assertThat(wallet.balance())
-                .isEqualTo(7 + 8);
+                .isEqualTo(7 + 8); // EVIDENT DATA
     }
 
 }
